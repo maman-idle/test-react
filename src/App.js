@@ -1,6 +1,8 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
-import Form from './components/Form'
+import Form from './components/Form';
+import SignUp from './components/SignUp';
 
 class App extends Component {
 
@@ -28,9 +30,16 @@ render() {
 
     //pass props to Form.js, props here are array of Objects
     return (
-      <div className="App">
-        <Form users={this.state.users} />
-      </div>
+      <Router>
+        <div className="App">
+        <Route exact path="/" render={props=>(
+          <React.Fragment>
+              <Form users={this.state.users} />
+            </React.Fragment>
+          )}/>
+          <Route path="/sign-up" component={SignUp} />  
+        </div>
+      </Router>
     );
   }
 }

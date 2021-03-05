@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Link} from 'react-router-dom'
 
 export class Form extends Component {
     constructor(props){
@@ -14,18 +15,13 @@ export class Form extends Component {
     }
 
     //use arrow function so u dont need to bind 
-    handleUsernameChange = (e) =>{
-        this.setState({username:e.target.value});
-    }
-
-    handlePasswordChange = (e) => {
-        this.setState({password:e.target.value})
+    handleChange = (e) =>{
+        this.setState({[e.target.name] : e.target.value});
     }
 
     //need to bind because normal function
     handleSubmit(e){
         var gotName = 'false'
-
         for( var i = 0; i<this.props.users.length; i++){
             if(this.props.users[i].username === this.state.username && this.props.users[i].password === this.state.password){
                 gotName = 'true';
@@ -37,6 +33,7 @@ export class Form extends Component {
         }
 
         if(gotName === 'true'){
+            e.preventDefault();
             alert('Hello '+ this.state.username);
         }else{
             alert('Who are you?');
@@ -46,7 +43,7 @@ export class Form extends Component {
         // this.props.users.map((user) => {
         //    if(this.state.username === user.username && this.state.password === user.password){
         //        gotName = 'true';
-        //        return;
+        //        break;
         //    }else{
         //        gotName = 'false';
         //    } 
@@ -61,15 +58,32 @@ export class Form extends Component {
                 <div className="row justify-content-center">
                     <form onSubmit={this.handleSubmit}>
                         <div className="col-md mt-3">
-                            <input className="form-control" type="text" placeholder="Username" value={this.state.username} onChange={this.handleUsernameChange} required></input>
+                            <input 
+                                className="form-control" 
+                                type="text" 
+                                name = "username"
+                                placeholder="Username" 
+                                value={this.state.username} 
+                                onChange={this.handleChange} required>
+                            </input>
                         </div>
                         <div className="col-md mt-3">                            
-                            <input className="form-control" type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange} required></input>
+                            <input 
+                                className="form-control" 
+                                type="password"
+                                name="password" 
+                                placeholder="Password" 
+                                value={this.state.password} 
+                                onChange={this.handleChange} required>
+                            </input>
                         </div>
                         <div className="col-sm mt-3 mb-3">
                             <input className="btn btn-sm btn-outline-warning" value="OK" type="submit"></input>
                         </div>
                     </form>
+                </div>
+                <div className='signUpSection'>
+                    <p className='small'>Don't have an account? Go <span><Link to='/sign-up'>Sign Up</Link></span></p>
                 </div>
             </div>
             
