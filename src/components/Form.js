@@ -54,7 +54,8 @@ export class Form extends Component {
     render() {
         console.log(this.props.users)
         return (
-            <div className="container">
+            <div className="container" style={{paddingTop:'200px'}}>        
+                <h1 className='text-center'>LOGIN</h1>
                 <div className="row justify-content-center">
                     <form onSubmit={this.handleSubmit}>
                         <div className="col-md mt-3">
@@ -77,13 +78,13 @@ export class Form extends Component {
                                 onChange={this.handleChange} required>
                             </input>
                         </div>
-                        <div className="col-sm mt-3 mb-3">
+                        <div className="col-sm mt-3 mb-3 text-center">
                             <input className="btn btn-sm btn-outline-warning" value="OK" type="submit"></input>
                         </div>
                     </form>
                 </div>
                 <div className='signUpSection'>
-                    <p className='small'>Don't have an account? Go <span><Link to='/sign-up'>Sign Up</Link></span></p>
+                    <p className='text-center small'>Don't have an account? Go <span><Link to='/sign-up'>Sign Up</Link></span></p>
                 </div>
             </div>
             
